@@ -1,4 +1,4 @@
-/** common.c -
+/** common.c
  * Copyright (C) 2026 Daniel Sierpiński and contributors
  *
  * This software is licensed under ISC License.
