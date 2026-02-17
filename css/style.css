@@ -1,0 +1,27 @@
+.warning-dialog {
+  padding-top: 15px;
+  background-color: rgba(55, 55, 75, 0.8);
+  color: white;
+  font-size: 21px;
+}
+
+.button {
+  font-size: 26px;
+  background-image: none;
+  background-color: rgba(55, 55, 85, 0.2);
+  color: white;
+  border: 1px solid #22222a;
+}
+
+.button:hover, .button:focus {
+  background-color: rgba(75, 75, 115, 0.4);
+}
+
+.button:active {
+  background-color: rgba(85, 95, 125, 0.4);
+}
+
+.suspend-button {
+  color: rgba(167, 65, 90, 0.3);
+  background-color: rgba(75, 75, 85, 0.4);
+}

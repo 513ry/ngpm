@@ -1,0 +1,23 @@
+*
+!*/
+!.gitignore
+
+# Source
+!src/[a-z]*.[ch]
+!src/client/[a-z]*.[ch]
+!src/ngpm/[a-z]*.[ch]
+!include/[a-z]*.h
+!css/[a-z]*.css
+
+# Build
+!Makefile
+!ngpmd.desktop.in
+!.copy
+!.version
+
+# Documentation
+!README.md
+!DESIGN.md
+
+# License
+!LICENSE

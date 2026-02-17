@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=@VERSION@
+Type=Application
+NoDisplay=true
+Name=@SERVICE@
+GenericName=Battery Monitor
+Comment=Battery monitoring service
+Keywords=power manager;
+TryExec=@SERVICE@
+Exec=@PREFIX@/bin/@SERVICE@
+StartupNotify=false
+Terminal=false
+X-GNOME-Autostart-enabled=true
