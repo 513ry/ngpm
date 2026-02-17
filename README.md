@@ -7,8 +7,9 @@ Please read [Design Manifesto](DESGIN.md) before installation.
 
 ## Installation
 
-> [!CAUTION] I been not testing this version on NetBSD yet, battery status is most
-> likely to be wrong if compiles.
+> [!CAUTION]
+> I been not testing this version on NetBSD yet, battery status is most likely
+> to be wrong if compiles.
 
 Compilation should detect one of possible targets: FreeBSD, NetBSD, or Linux. To
 compile and install the source run:
@@ -24,7 +25,8 @@ To compile ngpm with GTK 3 dialogs:
 bmake install -D WITH_GTK
 ```
 
-[!TIP] On NetBsd bmake is just [make](https://www.crufty.net/help/sjg/make_1.htm)
+> [!TIP]
+> On NetBsd bmake is just [make](https://www.crufty.net/help/sjg/make_1.htm)
 
 If you are a careful BSD user your probably want your `DESTDIR`:
 
