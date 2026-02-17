@@ -22,7 +22,7 @@ bmake install
 To compile ngpm with GTK 3 dialogs:
 
 ``` sh
-bmake install -D WITH_GTK
+bmake -D WITH_GTK
 ```
 
 > [!TIP]
