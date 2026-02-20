@@ -3,7 +3,7 @@
 ngpm is a very simple user-space glib battery status monitor for Linux, BSD, and
 Darvin with optional dependency on GTK 3 for alerts.
 
-Please read [Design Manifesto](DESGIN.md) before installation.
+Please read [Design Manifesto](DESIGN.md) before installation.
 
 ## Installation
 
@@ -26,7 +26,7 @@ bmake -D WITH_GTK
 ```
 
 > [!TIP]
-> On NetBsd bmake is just [make](https://www.crufty.net/help/sjg/make_1.htm)
+> On NetBSD bmake is just [make](https://www.crufty.net/help/sjg/make_1.htm)
 
 If you are a careful BSD user your probably want your `DESTDIR`:
 
@@ -63,9 +63,9 @@ configuration. For example to get current battery capacity percentage go:
 ngpm -c
 ```
 
-The data retrived will be capt according to the delay set by the `DELAY_IN_SEC`
-preprpcessor definition. Another values to watch out for before compilation is
-`THRESHOLD` and `CRIT_THRESHOLD`. You can list those values using client:
+`ngpmd` will be delayed according to `DELAY_IN_SEC` preprpcessor definition.
+Another values to watch out for before compilation is `THRESHOLD` and
+`CRIT_THRESHOLD`. You can list those values using client:
 
 ``` sh
 ngpm -l
