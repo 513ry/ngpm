@@ -1,6 +1,6 @@
 # ngpm
 
-ngpm is a very simple user-space glib battery status monitor for Linux, BSD, and
+ngpm is very simple user-space glib battery status monitor for Linux, BSD, and
 Darvin with optional dependency on GTK 3 for alerts.
 
 Please read [Design Manifesto](DESIGN.md) before installation.
@@ -57,10 +57,10 @@ After compilation you get two executables `ngpm` and `ngpmd`.
 start.
 
 `ngpm` command can help retrieve basic information about battery and ngpm
-configuration. For example to get current battery capacity percentage go:
+configuration. For example to print current battery capacity percentage go:
 
 ``` sh
-ngpm -c
+echo `ngpm -c`
 ```
 
 `ngpmd` will be delayed according to `DELAY_IN_SEC` preprpcessor definition.

@@ -20,7 +20,11 @@ XDGDIR         ?= /etc/xdg/autostart
 DESKTOP_IN     ?= ${.CURDIR}/${SERVICE_EXEC}.desktop.in
 DESKTOP_FILE   ?= ${.CURDIR}/${SERVICE_EXEC}.desktop
 
+.ifdef DEBUG
 CFLAGS         := -std=c99 -Og -g -Wall -Wextra
+.else
+CFLAGS         := -std=c99 -O3
+.endif
 CFLAGS         += -I${.CURDIR}/include
 
 .ifdef WITH_GTK
@@ -107,6 +111,7 @@ help:
 	@echo "  CRIT_THRESHOLD=n  Critical threshold {%}"
 	@echo "  DESTDIR=path      Installation root"
 	@echo "  XDGDIR=path       .desktop file destination"
+	@echo "  DEBUG=1           Set debug flags"
 	@echo ""
 	@echo "To get an idea about most flags: \`bmake -V CFLAGS\`"
 

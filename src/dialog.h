@@ -9,6 +9,8 @@
 #define _DIALOG_H
 # ifdef WITH_GTK
 
+typedef int gint;
+
 void init_dialog(void);
 void new_dialog(gint capacity);
 
