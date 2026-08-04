@@ -1,7 +1,7 @@
 # ngpm
 
-ngpm is very simple user-space glib battery status monitor for Linux, BSD, and
-Darvin with optional dependency on GTK 3 for alerts.
+ngpm is a very simple user-space GLib battery status monitor for Linux and BSD
+with an optional dependency on GTK 3 for graphical alerts.
 
 Please read [Design Manifesto](DESIGN.md) before installation.
 
@@ -11,12 +11,11 @@ Please read [Design Manifesto](DESIGN.md) before installation.
 > I been not testing this version on NetBSD yet, battery status is most likely
 > to be wrong if compiles.
 
-Compilation should detect one of possible targets: FreeBSD, NetBSD, or Linux. To
-compile and install the source run:
+Compilation should detect one of the possible targets: FreeBSD, NetBSD, or
+Linux. To compile the source, run:
 
 ``` sh
 bmake
-bmake install
 ```
 
 To compile ngpm with GTK 3 dialogs:
@@ -25,19 +24,22 @@ To compile ngpm with GTK 3 dialogs:
 bmake -D WITH_GTK
 ```
 
-> [!TIP]
-> On NetBSD bmake is just [make](https://www.crufty.net/help/sjg/make_1.htm)
+After installation, `ngpmd` should start automatically in new sessions on most
+POSIX systems:
 
-If you are a careful BSD user your probably want your `DESTDIR`:
+``` sh
+bmake install
+```
+
+If you are a careful BSD user looking for your `DESTDIR`:
 
 ``` sh
 DESTDIR=/tmp bmake install
-DESTDIR=/tmp bmake run-service
 ```
 
-Additionally you may want to change your battery id, although it's not relevant
-on FreeBSD as `hw.acpi.battery.life` will return combined capacity of all
-available batteries.
+Additionally, you may want to change your battery ID (although this is not
+relevant on FreeBSD, as `hw.acpi.battery.life` will return the combined capacity
+of all available batteries):
 
 ``` sh
 BATTERY=1 bmake
@@ -49,32 +51,42 @@ For more installation options check help command:
 bmake help
 ```
 
+> [!TIP]
+> On NetBSD bmake is just [make](https://www.crufty.net/help/sjg/make_1.htm)
+
 ## Usage
 
 After compilation you get two executables `ngpm` and `ngpmd`.
 
-`ngpmd` should be installed as a autostart .desktop file and enabled at xsession
-start.
+`ngpmd` is not a system daemon - `ngpmd.desktop` file will be installed to
+enable session application autostart.
 
-`ngpm` command can help retrieve basic information about battery and ngpm
-configuration. For example to print current battery capacity percentage go:
+The `ngpm` command can help retrieve basic information about the battery and
+configuration. For example, to print the current battery capacity percentage,
+run:
 
 ``` sh
-echo `ngpm -c`
+ngpm -c
 ```
 
-`ngpmd` will be delayed according to `DELAY_IN_SEC` preprpcessor definition.
-Another values to watch out for before compilation is `THRESHOLD` and
-`CRIT_THRESHOLD`. You can list those values using client:
+It's worth noting that non meta commands can be chained and execte in option set
+defined order. The listed outputs will be separated be a new line character
+('\n'):
+
+``` sh
+ngpm -cs
+```
+
+`ngpmd` comiplation constants can be listed with:
 
 ``` sh
 ngpm -l
 ```
 
-ngpm assumes you don't change those values often so changing them requires
+ngpm assumes you don't change those values often, so changing them requires
 recompilation.
 
-To learn more about ngpm client use the help option:
+To learn more about `ngpm` client, use the help option:
 
 ``` sh
 ngpm -h
@@ -91,5 +103,5 @@ To contribute:
 
 ## License
 
-ngpm is a free software licensed under ISC suplementary to Berne, UCC, or TRIPS
-copyright conventions.
+ngpm is a free/open software licensed under ISC, suplementary to Berne, UCC, or
+TRIPS copyright conventions.

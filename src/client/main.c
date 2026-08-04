@@ -47,14 +47,14 @@
 static void capacity(void);
 static void status(void);
 static void list(void);
-static void usage(void);
+static void help(void);
 static void version(void);
 
 typedef enum {
   OPT_CAPACITY,
   OPT_STATUS,
   OPT_LIST,
-  OPT_USAGE,
+  OPT_HELP,
   OPT_VERSION,
   OPT_COUNT
 } option_id;
@@ -65,7 +65,7 @@ static const action_fn actions[OPT_COUNT] = {
   [OPT_CAPACITY] = capacity,
   [OPT_STATUS]   = status,
   [OPT_LIST]     = list,
-  [OPT_USAGE]    = usage,
+  [OPT_HELP]    = help,
   [OPT_VERSION]  = version
 };
 
@@ -73,8 +73,19 @@ typedef unsigned int option_set;
 
 #define OPT_BIT(opt) (1u << (opt))
 
+static void
+usage(void)
+{
+  puts("Usage: ngpm [-c] [-s]\n"                             \
+       "       ngpm [-l]\n"                                  \
+       "       ngpm [-h]\n"                                  \
+       "       ngpm [-v]");
+}
+
 /* Print error and usage and return errno */
-void raise(int errno, char *fmt, ...) {
+void
+raise(int errno, char *fmt, ...)
+{
   va_list ap;
   va_start(ap, fmt);
 
@@ -128,7 +139,7 @@ main(int argc, char **argv)
         opts |= OPT_BIT(OPT_LIST);
         break;
       case 'h':
-        opts |= OPT_BIT(OPT_USAGE);
+        opts |= OPT_BIT(OPT_HELP);
         break;
       case 'v':
         opts |= OPT_BIT(OPT_VERSION);
@@ -142,7 +153,7 @@ main(int argc, char **argv)
 
   unsigned meta = 
     opts & (OPT_BIT(OPT_LIST) |
-            OPT_BIT(OPT_USAGE) |
+            OPT_BIT(OPT_HELP) |
             OPT_BIT(OPT_VERSION));
 
   int meta_count = __builtin_popcount(meta);
@@ -193,17 +204,16 @@ list(void)
 }
 
 static void
-usage(void)
+help(void)
 {
-  puts("Usage: ngpm [-c] [-s]\n"                             \
-       "       ngpm [-l]\n"                                  \
-       "       ngpm [-h]\n"                                  \
-       "       ngpm [-v]\n\n"                                \
-       "Options:\n"                                          \
-       "  -c      Print battery capacity\n"                  \
-       "  -s      Print battery status\n"                    \
-       "  -l      List compiled constants and exit\n"        \
-       "  -h      Print this help screen and exit\n"         \
+  usage();
+  puts("\nOptions are executed in the order defined in synopsis.\n\n" \
+       "Options:\n"                                                 \
+       "  -c      Print battery capacity\n"                         \
+       "  -s      Print battery status\n"                           \
+       "Meta Options:\n"                                            \
+       "  -l      List compiled constants and exit\n"               \
+       "  -h      Print this help screen and exit\n"                \
        "  -v      Print version and exit");
 }
 
