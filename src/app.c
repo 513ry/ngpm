@@ -1,4 +1,4 @@
-/** app.c - Initialize application and Bootstrap glib main loop
+/** app.c - Initialize application and bootstrap glib main loop
  * Copyright (C) 2026 Daniel Sierpiński and contributors
  *
  * This software is licensed under ISC License.
@@ -29,7 +29,9 @@ typedef struct {
   gint last_status;
 } BatteryData;
 
-static gboolean check_battery_capacity(gpointer user_data) {
+static gboolean
+check_battery_capacity(gpointer user_data)
+{
   gint status;
   gint capacity;
   BatteryData *args = (BatteryData *)user_data;
@@ -40,7 +42,7 @@ static gboolean check_battery_capacity(gpointer user_data) {
   case -2:
     g_error("Status parsing error");
   case 0:
-    // 1. If power supply is not connected do:
+    // 1. if power supply is not connected do:
     switch (capacity = battery_capacity()) {
     case -1:
       g_error("Capacity file can't be read");
@@ -48,16 +50,16 @@ static gboolean check_battery_capacity(gpointer user_data) {
       g_error("Capacity parsing error");
     }
 
-    // 1. If capacity <= `CRIT_THRESHOLD` system suspension.
+    // 1. if capacity <= `CRIT_THRESHOLD` system suspension.
     if (capacity <= args->crit_threshold) {
       g_warning("Capacity is bellow critical threshold");
       suspend();
     }
-    // 2. If state changed do:
+    // 2. if state changed do:
     if (status == args->last_status)
       return G_SOURCE_CONTINUE;
 
-    // 1. If capacity <= `THRESHOLD` display GTK 3 dialog or print message to stderr.
+    // 1. if capacity <= `THRESHOLD` display GTK 3 dialog or print message to stderr.
     if (capacity <= args->threshold)
       new_dialog(capacity);
   }
@@ -66,14 +68,18 @@ static gboolean check_battery_capacity(gpointer user_data) {
   return G_SOURCE_CONTINUE;
 }
 
-static gboolean quit_callback(gpointer user_data) {
+static gboolean
+quit_callback(gpointer user_data)
+{
   GMainLoop *loop = user_data;
   g_main_loop_unref(loop);
   g_main_loop_quit(loop);
   return G_SOURCE_REMOVE;
 }
 
-void run_battery_pool(unsigned int seconds, int threshold, int crit_threshold) {
+void
+run_battery_pool(unsigned int seconds, int threshold, int crit_threshold)
+{
   GMainLoop *loop = g_main_loop_new(NULL, 0);
 
   BatteryData *args = g_new(BatteryData, 1);
@@ -86,6 +92,7 @@ void run_battery_pool(unsigned int seconds, int threshold, int crit_threshold) {
   init_dialog();
 #endif
 
+  /* start */
   g_timeout_add_seconds_full(
     G_PRIORITY_DEFAULT, seconds, check_battery_capacity, (gpointer)args, g_free
   );
